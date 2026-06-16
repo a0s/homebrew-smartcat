@@ -14,16 +14,20 @@ class Smartcat < Formula
 
   def caveats
     <<~EOS
-      smartcat ships with no required dependencies. For the best experience,
-      install the optional viewers it knows about:
+      smartcat doesn't render files itself - it calls a viewer for each type and
+      falls back to plain cat when one isn't installed. Install the backends for
+      the types you use:
 
-        brew install glow bat chafa
+        brew install glow       # Markdown
+        brew install bat        # code, JSON/YAML/CSV
+        brew install poppler    # PDF (text)
+        brew install chafa      # images, outside iTerm2
 
-      Inline images use iTerm2's imgcat, available after:
-        iTerm2 -> Install Shell Integration
+      In iTerm2, images use the built-in imgcat (iTerm2 -> Install Shell
+      Integration). Run `smartcat -status` to see what's covered.
 
-      To make `cat` smart in interactive shells (safe: pipes and scripts are
-      untouched), add this to your ~/.zshrc:
+      Make `cat` smart in interactive shells (pipes and scripts stay untouched)
+      by adding this to your ~/.zshrc:
 
         eval "$(smartcat init zsh)"
 
